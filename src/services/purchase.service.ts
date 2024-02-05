@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import PurchaseOrder from "src/entitices/purcaseorder";
+import PurchaseOrder from "src/entitices/purcaseorder.entities";
 import { CreatePurcaseorderDTO, UpdatePurchaseorderDTO } from "src/pet.dto";
-import { Logger } from '@nestjs/common';
 @Injectable()
 export class PurchaseorderService {
 

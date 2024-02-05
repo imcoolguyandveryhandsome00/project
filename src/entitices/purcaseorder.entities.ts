@@ -1,8 +1,8 @@
 import { Type } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToOne, JoinColumn,ManyToOne,ManyToMany,OneToMany} from "typeorm";
-import User from './user';
-import Pet from './pet';
-import PetBaseEntity from './Petbaseentity';
+import User from './user.entities';
+import Pet from './pet.entities';
+import PetBaseEntity from './Petbaseentity.entities';
 
 
 @Entity()

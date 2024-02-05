@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import PetBaseEntity from "src/entitices/Petbaseentity";
+import PetBaseEntity from "src/entitices/Petbaseentity.entities";
 import { CreatePetBaseEntityDTO,UpdatePetBaseEntityDTO } from "src/pet.dto";
 
 @Injectable()
@@ -26,23 +26,19 @@ export class PetBaseEntityService {
             let user = null; //awit this.petrepository.findOne({id : purchaseorder.pet_id})
             
             let po = this.petbaseentityRepository.create({
-            
-    
+              id : 123
             })
             
             await po.save()
     
             return po
         }
-    }
- 
-    //  update(updatepetbaseentity: UpdatePetBaseEntityDTO): Promise<PetBaseEntity | null> {
-
-    //     return this.petbaseentityRepository.save(updatepetbaseentity);
-    // }
-
-    // async deleteById(id: number): Promise<void> {
-    //     await this.petbaseentityRepository.delete(id);
-    // }
- 
-//}
+        update(UpdatePetBaseEntityDTO: UpdatePetBaseEntityDTO): Promise<PetBaseEntity | null> {
+            return 
+        }
+    
+        async deleteById(id: number): Promise<void> {
+            await this.petbaseentityRepository.delete(id);
+        }
+    
+}

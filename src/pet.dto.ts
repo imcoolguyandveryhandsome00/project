@@ -66,28 +66,65 @@ export class UpdatePurchaseorderDTO {
 export class UpdatePetBaseEntityDTO {
     @IsNotEmpty()
     @IsString()
-    purchase_user : string;
-
-    @IsNotEmpty()
-    pet : string;
-
-    @IsNotEmpty()
-    is_paid : string;
-
-    @IsNotEmpty()
-    delivery_address : string;   
+    id : number;
 }
 export class CreatePetBaseEntityDTO{
     @IsNotEmpty()
     @IsString()
-    purchase_user : string;
+    id : string; 
+}
+export class CreateUserDTO{
+    @IsNotEmpty()
+    @IsString()
+    username : string;
 
     @IsNotEmpty()
-    pet : string;
+    password : string;
 
     @IsNotEmpty()
-    is_paid : string;
+    address : string;
 
     @IsNotEmpty()
-    delivery_address : string;   
+    first_name : string;   
+
+    @IsNotEmpty()
+    last_name : string;
+
+    @IsNotEmpty()
+    phone : string;
+
+    @IsNotEmpty()
+    @IsString()
+    roles: string[];
+
+    @IsNotEmpty()
+    is_admin : boolean;
+}
+export class UpdateUserDTO{
+    @IsNotEmpty()
+    @IsString()
+    username : string;
+
+    @IsNotEmpty()
+    password : string;
+
+    @IsNotEmpty()
+    address : string;
+
+    @IsNotEmpty()
+    first_name : string;   
+
+    @IsNotEmpty()
+    last_name : string;
+
+    @IsNotEmpty()
+    phone : string;
+
+    @IsNotEmpty()
+    @IsString()
+    roles: string[];
+
+
+    @IsNotEmpty()
+    is_admin : boolean;
 }

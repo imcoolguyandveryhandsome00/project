@@ -1,7 +1,7 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToOne, JoinColumn,ManyToOne,ManyToMany,OneToMany} from "typeorm";
-import PetBaseEntity from './Petbaseentity';
-import Pet from './pet';
+import { Entity, Column,OneToMany} from "typeorm";
+import PetBaseEntity from './Petbaseentity.entities';
+import Pet from './pet.entities';
 
 
 @Entity()
@@ -27,6 +27,9 @@ export default class User extends PetBaseEntity {
 
     @Column({default : false})
     is_admin : boolean;
+
+    @Column({ type: 'json', nullable: true })
+    roles: string[];
 
     @OneToMany(()=>Pet,(pet)=>pet.owner)
     pets : []
