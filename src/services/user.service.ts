@@ -1,9 +1,9 @@
-import { Injectable,NotFoundException } from "@nestjs/common";
+import { Injectable,NotFoundException,BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import User from "src/entitices/user.entities";
 import { CreateUserDTO, UpdateUserDTO } from "src/pet.dto";
-
+import { validate } from "class-validator";
 @Injectable()
 export class UserService {
     getstatus() : string{
@@ -25,9 +25,44 @@ export class UserService {
         return this.UserRepository.findOneBy({id:id});
     }
 
-    create(user : CreateUserDTO) : Promise<User|null> {
+     async create(user : CreateUserDTO) : Promise<User|null> {
+        try{
+            const errors = await validate(user);
+            if(errors.length > 0 ){
+              const errorMessage = errors.map(error => Object.values(error.constraints).join(', ')).join(', ');
+              console.error('Validation failed:', errors);
+              throw new Error(errorMessage);
+            }
+            else if(!isValidPassword(user.password) || !isValidPhone(user.phone)){
+              throw new BadRequestException('Invalid password or phone format');
+            }
+            else{
+              console.log('Validation successful');
+            }
         return this.UserRepository.save(user);
     }
+
+catch (error) {
+  console.error('Error during user creation:', error);
+  console.error('Password validation:', isValidPassword(user.password));
+  console.error('Phone validation:', isValidPhone(user.phone));
+  return null;
+}
+function isValidPassword(password: string): boolean {
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,20}$/;
+  if (!passwordRegex.test(password)) {
+    return false;
+  }
+  return true;
+}
+function isValidPhone(phone: string): boolean {
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+      return false;
+    }
+    return true;
+  }
+ }
  
     async update(id: number, update : UpdateUserDTO) : Promise<User | null>{
         const usertoUpdate = await this.UserRepository.findOne({ where: { id: id } });
